@@ -1,0 +1,21 @@
+on:
+  push:
+  pull_request:
+  pull_request_target:
+
+jobs:
+  debug:
+    permissions:
+      contents: read
+      actions: read
+    runs-on: ubuntu-latest
+    steps:
+    - name: debug
+      env:
+        github_json: ${{ toJSON(github) }}
+      run: |
+        echo "event file:"
+        cat "$GITHUB_EVENT_PATH"
+        echo "github:"
+        echo "$github_json"
+        echo
