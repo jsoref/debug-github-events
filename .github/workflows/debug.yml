@@ -17,13 +17,17 @@ jobs:
       env:
         github_json: ${{ toJSON(github) }}
       run: |
-        echo "::group::env"
-        env
-        echo "::endgroup::"      
-        echo "::group::event-file"
-        cat "$GITHUB_EVENT_PATH"
-        echo "::endgroup::"
-        echo "::group::github"
-        echo "$github_json"
-        echo "::endgroup::"
-        echo
+        wrap() {
+        (
+          echo "<details><summary>$1</summary>"
+          echo
+          echo '```'
+          cat -
+          echo '```'
+          echo '</details>'
+          echo
+        ) >> "$GITHUB_STEP_SUMMARY"
+        }
+        env | sort | wrap env
+        cat "$GITHUB_EVENT_PATH" | wrap event-file
+        echo "$github_json" | wrap github
