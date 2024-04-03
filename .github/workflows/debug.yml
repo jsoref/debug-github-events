@@ -29,6 +29,6 @@ jobs:
           echo
         ) >> "$GITHUB_STEP_SUMMARY"
         }
-        env -0 | sort -z | wrap env
+        env -0 | sort -z | tr '\0' '\n' | wrap env
         cat "$GITHUB_EVENT_PATH" | wrap event-file
         echo "$github_json" | wrap github
