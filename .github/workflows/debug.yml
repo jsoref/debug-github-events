@@ -23,11 +23,12 @@ jobs:
           echo
           echo '```'
           cat -
+          echo
           echo '```'
           echo '</details>'
           echo
         ) >> "$GITHUB_STEP_SUMMARY"
         }
-        env | sort | wrap env
+        env -0 | sort -z | wrap env
         cat "$GITHUB_EVENT_PATH" | wrap event-file
         echo "$github_json" | wrap github
