@@ -16,6 +16,7 @@ jobs:
     - name: debug
       env:
         github_json: ${{ toJSON(github) }}
+        runner_json: ${{ toJSON(runner) }}
       run: |
         wrap() {
         (
@@ -32,3 +33,4 @@ jobs:
         env -0 | sort -z | tr '\0' '\n' | wrap env
         cat "$GITHUB_EVENT_PATH" | wrap event-file
         echo "$github_json" | wrap github
+        echo "$runner_json" | wrap runner
