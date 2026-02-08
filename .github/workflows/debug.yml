@@ -3,8 +3,30 @@ name: debug
 on:
   push:
   pull_request_target:
+    types:
+      - assigned
+      - auto_merge_disabled
+      - auto_merge_enabled
+      - closed
+      - converted_to_draft
+      - demilestoned
+      - dequeued
+      - edited
+      - enqueued
+      - labeled
+      - locked
+      - milestoned
+      - opened
+      - ready_for_review
+      - reopened
+      - review_request_removed
+      - review_requested
+      - synchronize
+      - unassigned
+      - unlabeled
+      - unlocked
   issue_comment:
-  workflow_dispatch:  
+  workflow_dispatch:
 
 jobs:
   debug:
