@@ -40,6 +40,7 @@ jobs:
       env:
         github_json: ${{ toJSON(github) }}
         runner_json: ${{ toJSON(runner) }}
+        pull_request_base_sha: ${{ github.event.pull_request.base.sha }}
       run: |
         wrap() {
         (
@@ -57,3 +58,4 @@ jobs:
         cat "$GITHUB_EVENT_PATH" | wrap event-file
         echo "$github_json" | wrap github
         echo "$runner_json" | wrap runner
+        echo "$pull_request_base_sha" | wrap pull_request.base.sha
