@@ -41,7 +41,6 @@ jobs:
         github_json: ${{ toJSON(github) }}
         runner_json: ${{ toJSON(runner) }}
         pull_request_base_sha: ${{ github.event.pull_request.base.sha }}
-        has_pull_requests: ${{ github.repository.has_pull_requests }}
       run: |
         wrap() {
         (
@@ -60,6 +59,5 @@ jobs:
         echo "$github_json" | wrap github
         echo "$runner_json" | wrap runner
         echo "$pull_request_base_sha" | wrap pull_request.base.sha
-        echo "$has_pull_requests" | wrap repository.has_pull_requests
         (jq .repository.has_pull_requests "$GITHUB_EVENT_PATH" || true) | wrap jq-has_pull_requests
 
